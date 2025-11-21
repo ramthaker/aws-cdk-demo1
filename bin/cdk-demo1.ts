@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib/core';
 import { CdkDemo1Stack } from '../lib/cdk-demo1-stack';
+import { AwsSolutionsChecks } from 'cdk-nag';
+import { NagSuppressions } from 'cdk-nag';
 
 const app = new cdk.App();
 new CdkDemo1Stack(app, 'CdkDemo1Stack', {
@@ -18,3 +20,5 @@ new CdkDemo1Stack(app, 'CdkDemo1Stack', {
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
+// Add AWS Solutions pack (the most common & recommended)
+//cdk.Aspects.of(app).add(new AwsSolutionsChecks());
