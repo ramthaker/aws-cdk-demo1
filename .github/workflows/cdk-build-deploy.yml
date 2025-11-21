@@ -2,9 +2,9 @@ name: CDK CI/CD (OIDC)
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 concurrency:
   group: cdk-deploy-${{ github.ref }}
