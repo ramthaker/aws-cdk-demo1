@@ -29,10 +29,10 @@ export class CdkDemo1Stack extends cdk.Stack {
     });
 
      // Lambda Function
-    const handler1 = new lambda.Function(this, 'ItemsHandler', {
+    const handler1 = new lambda.Function(this, 'ItemsHandler1', {
       runtime: lambda.Runtime.NODEJS_20_X,
       code: lambda.Code.fromAsset(lambdaPath),
-      handler: 'items.handler',
+      handler: 'items.handler1',
       environment: {
         TABLE_NAME: table.tableName,
       },
