@@ -16,7 +16,7 @@ concurrency:
 
 env:
   AWS_REGION: us-east-1         # change region if needed
-  CDK_STACK: github.event.repository.name    # optional: a single stack to deploy. Use --all if you prefer
+  CDK_STACK: stack-1    # optional: a single stack to deploy. Use --all if you prefer
 
 jobs:
   synth:
@@ -75,4 +75,4 @@ jobs:
 
       - name: CDK deploy
         # For automated deploys: use --require-approval never or limit to a stack
-        run: npx cdk deploy ${CDK_STACK:---all} --require-approval never
+        run: npx cdk deploy --require-approval never
