@@ -1,4 +1,5 @@
 import * as cdk from 'aws-cdk-lib/core';
+import * as path from 'path';
 import { Construct } from 'constructs';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
@@ -15,10 +16,12 @@ export class CdkDemo1Stack extends cdk.Stack {
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
     });
 
+    const lambdaPath = path.join(__dirname, '..', 'lambda'); // <- robust path
+
     // Lambda Function
     const handler = new lambda.Function(this, 'ItemsHandler', {
-      runtime: lambda.Runtime.NODEJS_18_X,
-      code: lambda.Code.fromAsset('lambda'),
+      runtime: lambda.Runtime.NODEJS_20_X,
+      code: lambda.Code.fromAsset(lambdaPath),
       handler: 'items.handler',
       environment: {
         TABLE_NAME: table.tableName,
