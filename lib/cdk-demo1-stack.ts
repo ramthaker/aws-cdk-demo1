@@ -28,7 +28,7 @@ export class CdkDemo1Stack extends cdk.Stack {
     // Grant Lambda permissions.
     table.grantReadWriteData(handler);
 
-    // API Gateway
+    // API Gateway.
     const api = new apigateway.RestApi(this, 'ItemsApi', {
       restApiName: 'Items Service',
     });
