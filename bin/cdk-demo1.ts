@@ -2,8 +2,7 @@
 import * as cdk from 'aws-cdk-lib/core';
 import { CdkDemo1Stack } from '../lib/cdk-demo1-stack';
 import { AwsSolutionsChecks } from 'cdk-nag';
-import { NagSuppressions } from 'cdk-nag';
-
+import { Aspects } from 'aws-cdk-lib';
 // Allow CI to turn cdk-nag ON/OFF
 const enableNag = process.env.CDK_NAG === 'true';
 
