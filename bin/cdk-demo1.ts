@@ -4,6 +4,9 @@ import { CdkDemo1Stack } from '../lib/cdk-demo1-stack';
 import { AwsSolutionsChecks } from 'cdk-nag';
 import { NagSuppressions } from 'cdk-nag';
 
+// Allow CI to turn cdk-nag ON/OFF
+const enableNag = process.env.CDK_NAG === 'true';
+
 const app = new cdk.App();
 new CdkDemo1Stack(app, 'CdkDemo1Stack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
@@ -20,5 +23,8 @@ new CdkDemo1Stack(app, 'CdkDemo1Stack', {
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
+
 // Add AWS Solutions pack (the most common & recommended)
-//cdk.Aspects.of(app).add(new AwsSolutionsChecks());
+if (enableNag) {
+  Aspects.of(app).add(new AwsSolutionsChecks());
+}
