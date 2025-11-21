@@ -28,6 +28,16 @@ export class CdkDemo1Stack extends cdk.Stack {
       },
     });
 
+     // Lambda Function
+    const handler1 = new lambda.Function(this, 'ItemsHandler', {
+      runtime: lambda.Runtime.NODEJS_20_X,
+      code: lambda.Code.fromAsset(lambdaPath),
+      handler: 'items.handler',
+      environment: {
+        TABLE_NAME: table.tableName,
+      },
+    });
+
     // Grant Lambda permissions.
     table.grantReadWriteData(handler);
 
