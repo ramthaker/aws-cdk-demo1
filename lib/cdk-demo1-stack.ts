@@ -25,7 +25,7 @@ export class CdkDemo1Stack extends cdk.Stack {
       },
     });
 
-    // Grant Lambda permissions
+    // Grant Lambda permissions.
     table.grantReadWriteData(handler);
 
     // API Gateway
