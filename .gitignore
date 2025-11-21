@@ -1,5 +1,8 @@
 *.js
 !jest.config.js
+# allow lambda source files (override global *.js)
+!lambda/**
+
 *.d.ts
 node_modules
 
