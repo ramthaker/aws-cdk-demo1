@@ -28,6 +28,19 @@ export class CdkDemo1Stack extends cdk.Stack {
       },
     });
 
+// Lambda Function
+    const handler1 = new lambda.Function(this, 'ItemsHandler1', {
+      runtime: lambda.Runtime.NODEJS_20_X,
+      code: lambda.Code.fromAsset(lambdaPath),
+      handler: 'items.handler',
+      environment: {
+        TABLE_NAME: table.tableName,
+      },
+    });
+
+    // Grant Lambda permissions.
+    table.grantReadWriteData(handler1);
+
     // Grant Lambda permissions.
     table.grantReadWriteData(handler);
 
@@ -39,5 +52,14 @@ export class CdkDemo1Stack extends cdk.Stack {
     const items = api.root.addResource('items');
     items.addMethod('GET', new apigateway.LambdaIntegration(handler));
     items.addMethod('POST', new apigateway.LambdaIntegration(handler));
+
+     // API Gateway.
+    const api1 = new apigateway.RestApi(this, 'ItemsApi', {
+      restApiName: 'Items Service',
+    });
+
+    const items1 = api.root.addResource('items');
+    items.addMethod('GET', new apigateway.LambdaIntegration(handler1));
+    items.addMethod('POST', new apigateway.LambdaIntegration(handler1));
   }
 }
