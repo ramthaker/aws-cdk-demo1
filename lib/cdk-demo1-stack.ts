@@ -53,13 +53,26 @@ export class CdkDemo1Stack extends cdk.Stack {
     items.addMethod('GET', new apigateway.LambdaIntegration(handler));
     items.addMethod('POST', new apigateway.LambdaIntegration(handler));
 
-     // API Gateway.
-    const api1 = new apigateway.RestApi(this, 'ItemsApi', {
+      // Lambda Function
+    const handle2 = new lambda.Function(this, 'ItemsHandler2', {
+      runtime: lambda.Runtime.NODEJS_20_X,
+      code: lambda.Code.fromAsset(lambdaPath),
+      handler: 'items.handler',
+      environment: {
+        TABLE_NAME: table.tableName,
+      },
+    });
+
+    // Grant Lambda permissions.
+    table.grantReadWriteData(handle2);
+
+    // API Gateway.
+    const api2 = new apigateway.RestApi(this, 'ItemsApi2', {
       restApiName: 'Items Service',
     });
 
-    const items1 = api.root.addResource('items');
-    items.addMethod('GET', new apigateway.LambdaIntegration(handler1));
-    items.addMethod('POST', new apigateway.LambdaIntegration(handler1));
+    const items2 = api2.root.addResource('items2');
+    items2.addMethod('GET', new apigateway.LambdaIntegration(handler2));
+    items2.addMethod('POST', new apigateway.LambdaIntegration(handler2));
   }
 }
