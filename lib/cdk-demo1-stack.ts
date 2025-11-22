@@ -58,8 +58,8 @@ export class CdkDemo1Stack extends cdk.Stack {
       restApiName: 'Items Service',
     });
 
-    const items = api2.root.addResource('items');
-    items.addMethod('GET', new apigateway.LambdaIntegration(handler2));
-    items.addMethod('POST', new apigateway.LambdaIntegration(handler2));
+    const items2 = api2.root.addResource('items2');
+    items2.addMethod('GET', new apigateway.LambdaIntegration(handler2));
+    items2.addMethod('POST', new apigateway.LambdaIntegration(handler2));
   }
 }
