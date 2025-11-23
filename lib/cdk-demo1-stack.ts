@@ -54,7 +54,7 @@ export class CdkDemo1Stack extends cdk.Stack {
     items.addMethod('POST', new apigateway.LambdaIntegration(handler));
 
       // Lambda Function
-    const handle2 = new lambda.Function(this, 'ItemsHandler2', {
+    const handler2 = new lambda.Function(this, 'ItemsHandler2', {
       runtime: lambda.Runtime.NODEJS_20_X,
       code: lambda.Code.fromAsset(lambdaPath),
       handler: 'items.handler',
@@ -64,7 +64,7 @@ export class CdkDemo1Stack extends cdk.Stack {
     });
 
     // Grant Lambda permissions.
-    table.grantReadWriteData(handle2);
+    table.grantReadWriteData(handler2);
 
     // API Gateway.
     const api2 = new apigateway.RestApi(this, 'ItemsApi2', {
